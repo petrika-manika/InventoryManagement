@@ -1,0 +1,54 @@
+# Dependencies
+# All node modules should be excluded
+node_modules
+
+# Build outputs
+# Compiled production builds
+dist
+dist-ssr
+build
+
+# Environment variables
+# Local environment files should never be committed
+.env.local
+.env.*.local
+*.local
+
+# Logs
+# Debug and error logs from various package managers
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDE and editor files
+# VS Code settings (except extensions.json)
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+*~
+
+# OS files
+# Operating system generated files
+.DS_Store
+Thumbs.db
+
+# Testing
+# Test coverage reports
+coverage
+*.lcov
+.nyc_output
+
+# Temporary files
+*.tmp
+*.temp
