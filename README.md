@@ -4,7 +4,7 @@ A comprehensive inventory management system built with **Clean Architecture**, *
 
 ---
 
-## ?? **Features**
+## **Features**
 
 ### **Backend (.NET 8 Web API)**
 - ? **Clean Architecture** - Domain, Application, Infrastructure, API layers
