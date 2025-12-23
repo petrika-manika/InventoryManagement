@@ -47,12 +47,24 @@ export default function ClientCard({
   const isIndividual = isIndividualClient(client);
   const isBusiness = isBusinessClient(client);
 
-  // Get display name
-  const displayName = isIndividual
-    ? client.fullName
-    : isBusiness
-    ? client.contactPersonFullName
-    : "Unknown";
+  // Get display name with proper null checks
+  let displayName = "Unknown";
+
+  if (isIndividual) {
+    const individualClient = client as IndividualClientDto;
+    if (individualClient.fullName) {
+      displayName = individualClient.fullName;
+    } else if (individualClient.firstName && individualClient.lastName) {
+      displayName = `${individualClient.firstName} ${individualClient.lastName}`;
+    } else if (individualClient.firstName) {
+      displayName = individualClient.firstName;
+    } else if (individualClient.lastName) {
+      displayName = individualClient.lastName;
+    }
+  } else if (isBusiness) {
+    const businessClient = client as BusinessClientDto;
+    displayName = businessClient.contactPersonFullName || "Unknown Business";
+  }
 
   // Truncate text helper
   const truncate = (text: string | undefined, maxLength: number) => {

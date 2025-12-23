@@ -94,9 +94,12 @@ export default function ClientTable({
                 const isBusiness = isBusinessClient(client);
 
                 const displayName = isIndividual
-                  ? client.fullName
+                  ? (client as IndividualClientDto).fullName ||
+                    `${(client as IndividualClientDto).firstName} ${
+                      (client as IndividualClientDto).lastName
+                    }`
                   : isBusiness
-                  ? client.contactPersonFullName
+                  ? (client as BusinessClientDto).contactPersonFullName
                   : "Unknown";
 
                 return (

@@ -1,12 +1,9 @@
 using System.Net;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using FluentAssertions;
 using InventoryManagement.Application.Common.Models;
 using InventoryManagement.Application.Features.Products.Commands.CreateProduct;
 using InventoryManagement.Application.Features.Products.Commands.UpdateProduct;
-using InventoryManagement.Application.Features.Users.Commands.LoginUser;
-using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace InventoryManagement.API.Tests.IntegrationTests;
 
@@ -14,42 +11,10 @@ namespace InventoryManagement.API.Tests.IntegrationTests;
 /// Integration tests for ProductsController.
 /// Tests the entire API stack including authentication, validation, business logic, and database operations.
 /// </summary>
-public class ProductsControllerTests : IClassFixture<WebApplicationFactory<Program>>
+public class ProductsControllerTests : IntegrationTestBase
 {
-    private readonly WebApplicationFactory<Program> _factory;
-    private readonly HttpClient _client;
-
-    public ProductsControllerTests(WebApplicationFactory<Program> factory)
+    public ProductsControllerTests(CustomWebApplicationFactory factory) : base(factory)
     {
-        _factory = factory;
-        _client = factory.CreateClient();
-    }
-
-    /// <summary>
-    /// Helper method to get JWT token by logging in as admin.
-    /// </summary>
-    private async Task<string> GetJwtTokenAsync()
-    {
-        var loginCommand = new LoginUserCommand(
-            Email: "admin@inventoryapp.com",
-            Password: "Admin@123");
-
-        var response = await _client.PostAsJsonAsync("/api/auth/login", loginCommand);
-        response.EnsureSuccessStatusCode();
-
-        var result = await response.Content.ReadFromJsonAsync<AuthenticationResult>();
-        return result!.Token;
-    }
-
-    /// <summary>
-    /// Helper method to create authenticated HTTP client with JWT token.
-    /// </summary>
-    private async Task<HttpClient> GetAuthenticatedClientAsync()
-    {
-        var client = _factory.CreateClient();
-        var token = await GetJwtTokenAsync();
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        return client;
     }
 
     [Fact]
@@ -435,7 +400,8 @@ public class ProductsControllerTests : IClassFixture<WebApplicationFactory<Progr
             Quantity = 100,
             Reason = "Initial stock"
         };
-        await authenticatedClient.PostAsJsonAsync("/api/stock/add", addStockCommand);
+        var addStockResponse = await authenticatedClient.PostAsJsonAsync("/api/stock/add", addStockCommand);
+        addStockResponse.EnsureSuccessStatusCode();
 
         // Verify product has stock
         var verifyResponse1 = await authenticatedClient.GetAsync($"/api/products/{productId}");
@@ -449,7 +415,8 @@ public class ProductsControllerTests : IClassFixture<WebApplicationFactory<Progr
             Quantity = 100,
             Reason = "Clearing stock for deletion"
         };
-        await authenticatedClient.PostAsJsonAsync("/api/stock/remove", removeStockCommand);
+        var removeStockResponse = await authenticatedClient.PostAsJsonAsync("/api/stock/remove", removeStockCommand);
+        removeStockResponse.EnsureSuccessStatusCode();
 
         // Verify stock is now 0
         var verifyResponse2 = await authenticatedClient.GetAsync($"/api/products/{productId}");
@@ -459,7 +426,13 @@ public class ProductsControllerTests : IClassFixture<WebApplicationFactory<Progr
         // Act - Delete the product (should succeed now)
         var deleteResponse = await authenticatedClient.DeleteAsync($"/api/products/{productId}");
 
-        // Assert
+        // Assert with better error diagnostics
+        if (deleteResponse.StatusCode != HttpStatusCode.NoContent)
+        {
+            var errorContent = await deleteResponse.Content.ReadAsStringAsync();
+            Assert.Fail($"Expected NoContent (204) but got {deleteResponse.StatusCode} ({(int)deleteResponse.StatusCode}). Error: {errorContent}");
+        }
+
         deleteResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
         // Verify product is deactivated

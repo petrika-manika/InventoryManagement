@@ -15,7 +15,7 @@ A comprehensive inventory management system built with **Clean Architecture**, *
 - ? **RESTful API** - Following REST best practices
 - ? **Swagger/OpenAPI** - Interactive API documentation
 - ? **Exception Handling** - Global exception middleware
-- ? **Unit & Integration Tests** - Comprehensive test coverage
+- ? **Unit & Integration Tests** - Comprehensive test coverage with isolated test database
 
 ### **Modules**
 1. **User Management**
@@ -187,6 +187,13 @@ Frontend will be available at: `http://localhost:5173`
 
 ## ?? **Running Tests**
 
+### **Test Architecture**
+
+This project follows **industry best practices** for testing:
+- ? **Unit Tests** - Mocked dependencies, no database (fast)
+- ? **Integration Tests** - Separate test database with automatic cleanup
+- ? **Test Isolation** - Each test starts with clean state using Respawn
+
 ### **Backend Tests**
 
 ```bash
@@ -194,15 +201,48 @@ Frontend will be available at: `http://localhost:5173`
 dotnet test
 
 # Run specific project tests
-dotnet test tests/InventoryManagement.Domain.Tests
-dotnet test tests/InventoryManagement.Application.Tests
-dotnet test tests/InventoryManagement.API.Tests
+dotnet test tests/InventoryManagement.Domain.Tests      # Pure unit tests
+dotnet test tests/InventoryManagement.Application.Tests # Unit tests with mocks
+dotnet test tests/InventoryManagement.API.Tests         # Integration tests
+
+# Run with detailed output
+dotnet test --verbosity detailed
+
+# Run specific test class
+dotnet test --filter "FullyQualifiedName~ProductsControllerTests"
+```
+
+### **Test Statistics**
+- **Domain Tests:** 25+ tests (Pure unit tests, no dependencies)
+- **Application Tests:** 35+ tests (Unit tests with mocked DbContext)
+- **Integration Tests:** 18+ tests (Full stack with isolated test database)
+- **Total:** 78+ tests
+- **Execution Time:** ~33 seconds (all tests)
+
+### **Test Database**
+
+Integration tests use a **separate test database** (`InventoryManagementDb_TEST`):
+- ? **Isolated** from development database
+- ? **Automatic cleanup** using Respawn library
+- ? **Fresh state** before each test
+- ? **No data pollution** in development database
+
+**Configuration:**
+```json
+// tests/InventoryManagement.API.Tests/appsettings.Testing.json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=InventoryManagementDb_TEST;..."
+  }
+}
 ```
 
 ### **Test Coverage**
-- Domain Layer: Unit tests for entities and value objects
-- Application Layer: Unit tests for commands and queries
-- API Layer: Integration tests for controllers
+- **Domain Layer:** Unit tests for entities, value objects, and domain rules
+- **Application Layer:** Unit tests for command/query handlers with mocked dependencies
+- **API Layer:** Integration tests for controllers with actual database operations
+
+For detailed testing documentation, see [Testing Strategy](docs/TESTING_STRATEGY.md).
 
 ---
 

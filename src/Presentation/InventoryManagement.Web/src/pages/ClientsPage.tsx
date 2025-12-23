@@ -66,7 +66,10 @@ export default function ClientsPage() {
         // Type-specific search
         if (c.clientTypeId === 1) {
           const individual = c as IndividualClientDto;
-          return individual.fullName.toLowerCase().includes(term);
+          const fullName =
+            individual.fullName ||
+            `${individual.firstName} ${individual.lastName}`;
+          return fullName.toLowerCase().includes(term);
         } else {
           const business = c as BusinessClientDto;
           return (

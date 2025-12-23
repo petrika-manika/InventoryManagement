@@ -88,6 +88,7 @@ builder.Services.AddCors(options =>
             policy.WithOrigins(
                     "http://localhost:3000",      // CRA default
                     "http://localhost:5173",      // Vite default
+                    "http://localhost:5174",
                     "http://localhost:7174",      // Your actual port ✅
                     "https://localhost:7174")     // HTTPS version ✅
                   .AllowAnyHeader()

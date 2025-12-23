@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MD Files", "MD Files", "{02
 		05B-Product-CRUD-UI-Instructions.md = 05B-Product-CRUD-UI-Instructions.md
 		05C-Stock-Management-UI-Instructions.md = 05C-Stock-Management-UI-Instructions.md
 		06A-Backend-Clients-Module-Instructions.md = 06A-Backend-Clients-Module-Instructions.md
+		06B-Frontend-Clients-Module-Instructions.md = 06B-Frontend-Clients-Module-Instructions.md
 		06C-Infrastructure-API-Clients-Module-Instructions.md = 06C-Infrastructure-API-Clients-Module-Instructions.md
 	EndProjectSection
 EndProject

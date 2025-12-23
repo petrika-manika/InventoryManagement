@@ -57,11 +57,12 @@ public sealed class BusinessClientConfiguration : IEntityTypeConfiguration<Busin
         builder.Ignore(c => c.OwnerFullName);
         builder.Ignore(c => c.ContactPersonFullName);
 
-        // Unique constraint on NIPT (only for active clients)
+        // Unique constraint on NIPT (only for active business clients with non-null NIPT)
+        // Filter excludes NULL values to allow multiple Individual clients (which have NULL NIPT)
         builder.HasIndex(c => c.NIPT)
             .IsUnique()
             .HasDatabaseName("IX_BusinessClients_NIPT_Unique")
-            .HasFilter("[IsActive] = 1");
+            .HasFilter("[NIPT] IS NOT NULL AND [IsActive] = 1");
 
         // Indexes for search performance
         builder.HasIndex(c => c.ContactPersonFirstName)
