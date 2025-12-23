@@ -4,7 +4,7 @@ A comprehensive inventory management system built with **Clean Architecture**, *
 
 ---
 
-## ?? **Features**
+## **Features**
 
 ### **Backend (.NET 8 Web API)**
 - ? **Clean Architecture** - Domain, Application, Infrastructure, API layers
@@ -44,17 +44,17 @@ A comprehensive inventory management system built with **Clean Architecture**, *
    - Soft delete support
 
 ### **Frontend (React + TypeScript)**
-- ? **React 18** - Modern React with hooks
-- ? **TypeScript** - Type-safe development
-- ? **TailwindCSS** - Utility-first CSS framework
-- ? **React Router** - Client-side routing
-- ? **Axios** - HTTP client
-- ? **React Hook Form** - Form management
-- ? **Context API** - State management
+- **React 18** - Modern React with hooks
+- **TypeScript** - Type-safe development
+- **TailwindCSS** - Utility-first CSS framework
+- **React Router** - Client-side routing
+- **Axios** - HTTP client
+- **React Hook Form** - Form management
+- **Context API** - State management
 
 ---
 
-## ??? **Architecture**
+## **Architecture**
 
 ### **Clean Architecture Layers**
 
@@ -95,7 +95,7 @@ A comprehensive inventory management system built with **Clean Architecture**, *
 
 ---
 
-## ?? **Prerequisites**
+## **Prerequisites**
 
 - **.NET 8 SDK** - [Download](https://dotnet.microsoft.com/download/dotnet/8.0)
 - **Node.js 18+** - [Download](https://nodejs.org/)
@@ -105,7 +105,7 @@ A comprehensive inventory management system built with **Clean Architecture**, *
 
 ---
 
-## ??? **Getting Started**
+## **Getting Started**
 
 ### **1. Clone the Repository**
 
@@ -185,7 +185,7 @@ Frontend will be available at: `http://localhost:5173`
 
 ---
 
-## ?? **Running Tests**
+## **Running Tests**
 
 ### **Test Architecture**
 
@@ -246,7 +246,7 @@ For detailed testing documentation, see [Testing Strategy](docs/TESTING_STRATEGY
 
 ---
 
-## ?? **Project Structure**
+## **Project Structure**
 
 ```
 InventoryManagement/
@@ -268,7 +268,7 @@ InventoryManagement/
 
 ---
 
-## ?? **Authentication**
+## **Authentication**
 
 ### **Login**
 
@@ -304,7 +304,7 @@ Authorization: Bearer {your-token}
 
 ---
 
-## ?? **API Endpoints**
+## **API Endpoints**
 
 ### **Authentication**
 - `POST /api/auth/login` - Login
@@ -350,7 +350,7 @@ Authorization: Bearer {your-token}
 
 ---
 
-## ??? **Database Schema**
+## **Database Schema**
 
 ### **Users Table**
 - Id (Guid)
@@ -384,7 +384,7 @@ Authorization: Bearer {your-token}
 
 ---
 
-## ?? **Key Design Patterns**
+## **Key Design Patterns**
 
 1. **Clean Architecture** - Separation of concerns
 2. **CQRS** - Command Query Responsibility Segregation
@@ -396,7 +396,7 @@ Authorization: Bearer {your-token}
 
 ---
 
-## ?? **Technologies Used**
+## **Technologies Used**
 
 ### **Backend**
 - .NET 8
@@ -419,7 +419,7 @@ Authorization: Bearer {your-token}
 
 ---
 
-## ?? **Development Guidelines**
+## **Development Guidelines**
 
 ### **Backend**
 - Follow Clean Architecture principles
@@ -438,7 +438,7 @@ Authorization: Bearer {your-token}
 
 ---
 
-## ?? **Roadmap**
+## **Roadmap**
 
 - [ ] Add role-based authorization
 - [ ] Implement real-time notifications (SignalR)
@@ -451,7 +451,7 @@ Authorization: Bearer {your-token}
 
 ---
 
-## ?? **Contributing**
+## **Contributing**
 
 Contributions are welcome! Please follow these steps:
 
@@ -463,20 +463,20 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## ?? **License**
+## **License**
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## ?? **Author**
+## **Author**
 
 **Petrika Manika**
 - GitHub: [@petrika-manika](https://github.com/petrika-manika)
 
 ---
 
-## ?? **Support**
+## **Support**
 
 If you have any questions or issues, please:
 1. Check the [Documentation](docs/)
@@ -485,4 +485,4 @@ If you have any questions or issues, please:
 
 ---
 
-**Happy Coding! ??**
+**Happy Coding!**
