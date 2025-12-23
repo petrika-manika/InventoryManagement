@@ -428,3 +428,6 @@ secrets.json
 *.bak
 Thumbs.db
 .DS_Store
+/PROJECT_OVERVIEW.md
+/docs
+/src/Presentation/InventoryManagement.Web/PROJECT_DOCUMENTATION.md
